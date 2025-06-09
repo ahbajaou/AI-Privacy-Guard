@@ -43,8 +43,8 @@ function App() {
         const tabId = tabs[0].id;
 
         const isSupportedSite = tabUrl && (
-          tabUrl.startsWith("https://chat.openai.com") || 
-          tabUrl.startsWith("https://chatgpt.com") || 
+          tabUrl.startsWith("https://chat.openai.com") ||
+          tabUrl.startsWith("https://chatgpt.com") ||
           tabUrl.startsWith("https://gemini.google.com")
         );
 
@@ -101,7 +101,7 @@ function App() {
           <h3>Privacy Protection</h3>
           <p>Blur sensitive content while typing</p>
         </div>
-        
+
         <div className="toggle-container">
           <label className="toggle-switch">
             <input
@@ -126,9 +126,13 @@ function App() {
             Navigate to ChatGPT or Gemini to use this extension
           </div>
         )}
-      </div>
 
-      <div className="footer">
+      </div>
+      <div className='allrights'>
+        <span href="https://github.com/ahbajaou">© 2025 Cheb2ub. All Rights Reserved</span>
+
+      </div>
+      {/* <div className="footer">
         <div className="supported-sites">
           <span className="footer-title">Supported Sites:</span>
           <div className="site-badges">
@@ -136,7 +140,7 @@ function App() {
             <span className="badge">Gemini</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
