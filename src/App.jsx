@@ -27,6 +27,7 @@ function App() {
         }
       });
     }
+    // Remove the Ko-fi script loading - it won't work in extensions
   }, []);
 
   const handleToggleChange = () => {
@@ -49,16 +50,11 @@ function App() {
         );
 
         if (tabId && isSupportedSite) {
-          console.log(`URL check PASSED. Sending message to tab ${tabId}`);
           chrome.tabs.sendMessage(tabId, {
             action: 'setBlur',
             isEnabled: newState,
           });
-        } else {
-          console.log("URL check failed. The active tab is not a supported page.");
         }
-      } else {
-        console.error("Could not find a valid active tab.");
       }
     });
   };
@@ -127,20 +123,23 @@ function App() {
           </div>
         )}
 
-      </div>
-      <div className='allrights'>
-        <span href="https://github.com/ahbajaou">© 2025 Cheb2ub. All Rights Reserved</span>
-
-      </div>
-      {/* <div className="footer">
-        <div className="supported-sites">
-          <span className="footer-title">Supported Sites:</span>
-          <div className="site-badges">
-            <span className="badge">ChatGPT</span>
-            <span className="badge">Gemini</span>
-          </div>
+        {/* Custom Ko-fi Support Button */}
+        <div className="support-section">
+          <a 
+            href="https://ko-fi.com/Y8Y21G7QTO" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="kofi-button"
+          >
+            <span className="kofi-icon">☕</span>
+            Support me on Ko-fi
+          </a>
         </div>
-      </div> */}
+      </div>
+
+      <div className='allrights'>
+        <span>© 2025 Cheb2ub. All Rights Reserved</span>
+      </div>
     </div>
   );
 }

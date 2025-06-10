@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "ChatGPT Privacy Guard",
+    "name": "AI Privacy Guard",
     "version": "1.0",
-    "description": "Blurs the chat history in the ChatGPT sidebar for privacy.",
+    "description": "Blurs the sensitive chat history sidebar on ChatGPT and Gemini for enhanced privacy.",
     "permissions": [
         "storage",
         "tabs"
@@ -14,12 +14,12 @@
     ],
     "action": {
         "default_popup": "index.html",
-        "default_title": "ChatGPT Privacy Guard"
+        "default_title": "AI Privacy Guard"
     },
     "icons": {
-        "16": "pngegg.png",
-        "48": "pngegg.png",
-        "128": "pngegg.png"
+        "16": "security16.png",
+        "48": "security48.png",
+        "128": "security128.png"
     },
     "content_scripts": [
         {
