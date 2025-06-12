@@ -9,7 +9,8 @@ function App() {
 
   useEffect(() => {
     if (isExtension) {
-      chrome.storage.sync.get('blurEnabled', (data) => {
+      // Only get the blur enabled state
+      chrome.storage.sync.get(['blurEnabled'], (data) => {
         setIsEnabled(!!data.blurEnabled);
       });
 
