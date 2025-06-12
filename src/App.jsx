@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaGithub } from 'react-icons/fa';
 import './App.css';
 
 const isExtension = !!(window.chrome && window.chrome.runtime);
@@ -9,21 +10,31 @@ function App() {
 
   useEffect(() => {
     if (isExtension) {
-      // Only get the blur enabled state
-      chrome.storage.sync.get(['blurEnabled'], (data) => {
-        setIsEnabled(!!data.blurEnabled);
-      });
-
-      // Get current tab info
+      // Get current tab info first
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs && tabs[0]) {
           const tabUrl = tabs[0].url;
+          let site = '';
+
           if (tabUrl.startsWith("https://chat.openai.com") || tabUrl.startsWith("https://chatgpt.com")) {
+            site = 'ChatGPT';
             setCurrentSite('ChatGPT');
           } else if (tabUrl.startsWith("https://gemini.google.com")) {
+            site = 'Gemini';
             setCurrentSite('Gemini');
           } else {
+            site = 'Unsupported';
             setCurrentSite('Unsupported');
+          }
+
+          // Get blur state for this specific site
+          if (site !== 'Unsupported') {
+            const storageKey = `blurEnabled_${site}`;
+            chrome.storage.sync.get([storageKey], (data) => {
+              setIsEnabled(!!data[storageKey]);
+            });
+          } else {
+            setIsEnabled(false);
           }
         }
       });
@@ -35,9 +46,11 @@ function App() {
     const newState = !isEnabled;
     setIsEnabled(newState);
 
-    if (!isExtension) { return; }
+    if (!isExtension || currentSite === 'Unsupported') { return; }
 
-    chrome.storage.sync.set({ blurEnabled: newState });
+    // Store setting per site
+    const storageKey = `blurEnabled_${currentSite}`;
+    chrome.storage.sync.set({ [storageKey]: newState });
 
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs && tabs[0]) {
@@ -124,20 +137,20 @@ function App() {
           </div>
         )}
 
-        {/* Custom Ko-fi Support Button */}
+        {/* GitHub Repository Link */}
+        {/* GitHub Repository Link */}
         <div className="support-section">
-          <a 
-            href="https://ko-fi.com/Y8Y21G7QTO" 
-            target="_blank" 
+          <a
+            href="https://github.com/ahbajaou/AI-Privacy-Guard"
+            target="_blank"
             rel="noopener noreferrer"
-            className="kofi-button"
+            className="github-button"
           >
-            <span className="kofi-icon">☕</span>
-            Support me on Ko-fi
+            <FaGithub size={20} color='#fff' />
+            <span style={{ marginLeft: '8px' }} >GitHub</span>
           </a>
         </div>
       </div>
-
       <div className='allrights'>
         <span>© 2025 Cheb2ub. All Rights Reserved</span>
       </div>

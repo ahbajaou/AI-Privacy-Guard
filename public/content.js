@@ -64,15 +64,50 @@ if (activeSelector) {
     const enableBlur = () => { document.body.classList.add(BLUR_CLASS_NAME); };
     const disableBlur = () => { document.body.classList.remove(BLUR_CLASS_NAME); };
 
+    // Function to get the current site name
+    const getCurrentSite = () => {
+        if (hostname.includes('chatgpt') || hostname.includes('openai')) {
+            return 'ChatGPT';
+        } else if (hostname.includes('gemini.google')) {
+            return 'Gemini';
+        }
+        return null;
+    };
+
+    // Function to check and apply current blur state
+    const checkAndApplyBlurState = () => {
+        const site = getCurrentSite();
+        if (!site) return;
+
+        const storageKey = `blurEnabled_${site}`;
+        chrome.storage.sync.get([storageKey], (data) => {
+            if (data[storageKey]) {
+                enableBlur();
+            } else {
+                disableBlur();
+            }
+        });
+    };
+
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.action === 'setBlur') {
             message.isEnabled ? enableBlur() : disableBlur();
         }
     });
 
-    chrome.storage.sync.get('blurEnabled', (data) => {
-        if (data.blurEnabled) {
-            enableBlur();
+    // Check blur state when page loads
+    checkAndApplyBlurState();
+
+    // Listen for storage changes for this specific site
+    chrome.storage.onChanged.addListener((changes, namespace) => {
+        if (namespace === 'sync') {
+            const site = getCurrentSite();
+            if (!site) return;
+
+            const storageKey = `blurEnabled_${site}`;
+            if (changes[storageKey]) {
+                changes[storageKey].newValue ? enableBlur() : disableBlur();
+            }
         }
     });
 }

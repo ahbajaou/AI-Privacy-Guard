@@ -346,3 +346,41 @@ input:disabled+.slider {
 .toggle-container {
   animation: slideIn 0.3s ease-out 0.1s both;
 }
+
+.support-section {
+  margin-top: 12px; /* Reduced margin */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 0.3s ease-out 0.2s both;
+  padding: 16px 20px; /* Reduced padding */
+}
+
+.github-button {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 3px 12px rgba(36, 41, 46, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 140px;
+  justify-content: center;
+}
+
+.github-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(36, 41, 46, 0.4);
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(135deg, #2c3238 0%, #24292e 100%);
+}
+
+.github-button svg {
+  flex-shrink: 0;
+}
