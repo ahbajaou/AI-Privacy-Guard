@@ -1,17 +1,16 @@
 {
     "manifest_version": 3,
     "name": "AI Privacy Guard",
-    "version": "1.1",
-    "description": "Blurs the sensitive chat history sidebar on ChatGPT and Gemini for enhanced privacy.",
+    "version": "1.3.0",
+      "description": "Blur chat history on ChatGPT, Gemini & Claude. Hide sidebar titles during screen sharing with Presentation Mode.",
     "permissions": [
-        "storage",
-        "tabs",
-        "activeTab"
+        "storage"
     ],
     "host_permissions": [
         "https://chat.openai.com/*",
         "https://chatgpt.com/*",
-        "https://gemini.google.com/*"
+        "https://gemini.google.com/*",
+        "https://claude.ai/*"
     ],
     "action": {
         "default_popup": "index.html",
@@ -25,16 +24,30 @@
     "background": {
         "service_worker": "background.js"
     },
+    "commands": {
+        "toggle-presentation-safe-mode": {
+            "suggested_key": {
+                "default": "Alt+Shift+P"
+            },
+            "description": "Toggle Presentation Safe Mode"
+        }
+    },
     "content_scripts": [
         {
             "matches": [
                 "https://chat.openai.com/*",
                 "https://chatgpt.com/*",
-                "https://gemini.google.com/*"
+                "https://gemini.google.com/*",
+                "https://claude.ai/*"
             ],
             "js": [
+                "platforms.js",
                 "content.js"
-            ]
+            ],
+            "css": [
+                "privacy.css"
+            ],
+            "run_at": "document_start"
         }
     ]
 }

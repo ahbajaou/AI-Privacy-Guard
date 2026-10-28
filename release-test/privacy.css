@@ -1,0 +1,78 @@
+/* Loaded by Chrome at document_start, before the content script reads settings. */
+
+:root {
+  --aipg-privacy-stylesheet-loaded: 1 !important;
+}
+
+/* Fail closed during settings restoration, but only for identified chat routes. */
+body:not([data-aipg-ready]) nav[role="navigation"] a[href^="/c/"],
+body:not([data-aipg-ready]) nav[role="navigation"] a[href^="/g/"][href*="/c/"],
+body:not([data-aipg-ready]) nav[role="navigation"] a[href^="/g/"]:not([href*="/c/"]),
+body:not([data-aipg-ready]) nav[role="navigation"] a[href^="/projects/"],
+body:not([data-aipg-ready]) nav[role="navigation"] a[href^="/project/"],
+body:not([data-aipg-ready]) nav[role="navigation"] [data-aipg-chatgpt-project-title],
+body:not([data-aipg-ready]) a[href^="/chat/"] {
+  filter: blur(6px) !important;
+  transition: filter 0.15s ease;
+}
+
+body:not([data-aipg-ready]) bard-sidenav[role="navigation"] [data-aipg-gemini-conversation-title],
+body:not([data-aipg-ready]) bard-sidenav[role="navigation"] [data-aipg-gemini-project-title] {
+  filter: blur(6px) !important;
+  transition: filter 0.15s ease;
+}
+
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] a[href^="/c/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] a[href^="/g/"][href*="/c/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] a[href^="/g/"]:not([href*="/c/"]),
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] a[href^="/projects/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] a[href^="/project/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"] nav[role="navigation"] [data-aipg-chatgpt-project-title],
+body[data-aipg-platform="Gemini"][data-aipg-enabled="true"] bard-sidenav[role="navigation"] [data-aipg-gemini-conversation-title],
+body[data-aipg-platform="Gemini"][data-aipg-enabled="true"] bard-sidenav[role="navigation"] [data-aipg-gemini-project-title] {
+  filter: blur(6px) !important;
+  transition: filter 0.15s ease;
+}
+
+body[data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) nav[role="navigation"] a[href^="/c/"]:hover,
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) nav[role="navigation"] a[href^="/g/"]:hover,
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) nav[role="navigation"] a[href^="/projects/"]:hover,
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) nav[role="navigation"] a[href^="/project/"]:hover,
+body[data-aipg-platform="ChatGPT"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) nav[role="navigation"] [data-aipg-chatgpt-project-row]:hover [data-aipg-chatgpt-project-title],
+body[data-aipg-platform="Gemini"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) bard-sidenav[role="navigation"] [data-aipg-gemini-conversation-title]:hover,
+body[data-aipg-platform="Gemini"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) bard-sidenav[role="navigation"] [data-aipg-gemini-project-title]:hover,
+body[data-aipg-platform="Claude"][data-aipg-enabled="true"][data-aipg-hover-reveal="true"]:not([data-aipg-safe-mode="true"]) a[href^="/chat/"]:hover {
+  filter: none !important;
+}
+
+body[data-aipg-platform="Claude"][data-aipg-enabled="true"] a[href^="/chat/"] {
+  filter: blur(6px) !important;
+  transition: none;
+}
+
+/* Safe Mode is opaque and has no hover or focus reveal rule. */
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] a[href^="/c/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] a[href^="/g/"][href*="/c/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] a[href^="/g/"]:not([href*="/c/"]),
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] a[href^="/projects/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] a[href^="/project/"],
+body[data-aipg-platform="ChatGPT"][data-aipg-safe-mode="true"] nav[role="navigation"] [data-aipg-chatgpt-project-title],
+body[data-aipg-platform="Claude"][data-aipg-safe-mode="true"] a[href^="/chat/"],
+body[data-aipg-platform="Claude"][data-aipg-safe-mode="true"] a[href^="/chat/"] * {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background-color: #111 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  transition: none !important;
+}
+
+body[data-aipg-platform="Gemini"][data-aipg-safe-mode="true"] bard-sidenav[role="navigation"] [data-aipg-gemini-conversation-title],
+body[data-aipg-platform="Gemini"][data-aipg-safe-mode="true"] bard-sidenav[role="navigation"] [data-aipg-gemini-project-title] {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  background-color: #111 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  transition: none !important;
+}
